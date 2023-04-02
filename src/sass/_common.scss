@@ -1,1 +1,94 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+body {
+  background-color: rgba(211, 209, 210, 0.542);
+}
+
+.search-form {
+  background: linear-gradient(
+    0deg,
+    rgba(195, 193, 34, 1) 20%,
+    rgba(45, 105, 253, 1) 100%
+  );
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+}
+.search-form input {
+  box-shadow: 0 15px 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(253, 251, 251);
+  box-shadow: 0 15px 10px 0 rgba(0, 0, 0, 0.2);
+  &:focus,
+  &:hover {
+    outline: none;
+    transform: scale(1.1);
+  }
+}
+
+.load-more {
+  background: linear-gradient(
+    0deg,
+    rgba(195, 193, 34, 1) 20%,
+    rgba(45, 105, 253, 1) 100%
+  );
+  width: 150px;
+  min-height: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+.search-form button {
+  cursor: pointer;
+  width: 40px;
+  background-image: url('../images/search.svg');
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: 50% 50%;
+}
+.is-hidden {
+  display: none;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  text-decoration: none;
+  padding: 15px;
+}
+.photo-card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(243, 243, 243, 0.6);
+}
+.gallery__item {
+  border-radius: 10px;
+  text-decoration: none;
+  max-height: 270px;
+  color: black;
+  box-shadow: 0 15px 10px 0 rgba(0, 0, 0, 0.2);
+}
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(180, 203, 56);
+  padding: 0px 10px;
+}

@@ -37,6 +37,7 @@ button {
 }
 
 .load-more {
+  display: block;
   background: linear-gradient(
     0deg,
     rgba(195, 193, 34, 1) 20%,
@@ -44,11 +45,14 @@ button {
   );
   width: 150px;
   min-height: 50px;
-  display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 25px;
   margin-top: 10px;
+}
+
+.is-hiden {
+  display: none;
 }
 
 img {

@@ -1,18 +1,19 @@
 import './sass/index.scss';
 import { fetchPictures } from './js/pictureApiService';
 import { Notify } from 'notiflix';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const searchForm = document.querySelector('.search-form');
 const galleryBox = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 loadMoreBtn.classList.add('is-hiden');
-console.log(loadMoreBtn);
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onloadMore);
 
 let query = '';
 let page = 1;
+let simpleLightBox;
 const perPage = 40;
 
 async function onSearch(e) {
@@ -24,7 +25,7 @@ async function onSearch(e) {
 
   loadMoreBtn.classList.add('is-hiden');
   try {
-    const { hits, totalHits } = await fetchPictures(query, page, perPage);
+    const { data, hits, totalHits } = await fetchPictures(query, page, perPage);
     console.log(hits);
     console.log(totalHits);
     if (!query || totalHits === 0) {
@@ -36,6 +37,11 @@ async function onSearch(e) {
       return;
     } else if (hits.length < 40) {
       createMarkup(hits);
+      simpleLightBox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+      }).refresh();
       Notify.success(`Hooray! We found ${totalHits} images.`);
       loadMoreBtn.classList.add('is-hiden');
       Notify.info("We're sorry, but you've reached the end of search results.");
@@ -44,6 +50,11 @@ async function onSearch(e) {
       Notify.info("We're sorry, but you've reached the end of search results.");
     } else {
       createMarkup(hits);
+      simpleLightBox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+      }).refresh();
       Notify.success(`Hooray! We found ${totalHits} images.`);
       loadMoreBtn.classList.remove('is-hiden');
       searchForm.reset();
@@ -55,12 +66,16 @@ async function onSearch(e) {
 
 async function onloadMore() {
   page += 1;
-
+  simpleLightBox.destroy();
   try {
     const { hits, totalHits } = await fetchPictures(query, page, perPage);
 
     createMarkup(hits);
-
+    simpleLightBox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionPosition: 'bottom',
+      captionDelay: 250,
+    }).refresh();
     if (page > totalHits / perPage) {
       loadMoreBtn.classList.add('is-hiden');
       Notify.info("We're sorry, but you've reached the end of search results.");
